@@ -13,7 +13,11 @@ $(document).ready(function() {
       type: 'POST',
       data: input_data
     }).done(function(response_data){
-      $('h1').after('Grandma Says: ' + response_data + "<p>");
+      if (!$('#grandma_says').length) {
+        $('h1').after('<p> Grandma says: <span id="grandma_says"></p>');
+      }
+
+      $('#grandma_says').text(response_data);
     });
   });
 });
