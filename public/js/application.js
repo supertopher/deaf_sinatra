@@ -1,7 +1,19 @@
-$(document).ready(function() {
-  // This is called after the document has loaded in its entirety
-  // This guarantees that any elements we bind to will exist on the page
-  // when we try to bind to them
+// $(document).ready(function() {
+//   $('form').$submit(function() {
+//     alert('do stuff');
+// )});
 
-  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+$(document).ready(function() {
+  $("form").on( "submit", function( event ) {
+    event.preventDefault();
+    var input_data = $(this).serialize();
+    console.log( input_data );
+    $.ajax({
+      url: '/grandma',
+      type: 'POST',
+      data: input_data
+    }).done(function(response_data){
+      $('h1').after('Grandma Says: ' + response_data + "<p>");
+    });
+  });
 });
